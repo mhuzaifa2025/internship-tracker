@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internship Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<h1>Internship Application Tracker</h1>
+
+<form method="POST">
+    <input type="text" name="company" placeholder="Company name" required>
+
+    <select name="status">
+        <option value="Applied">Applied</option>
+        <option value="Interview">Interview</option>
+        <option value="Rejected">Rejected</option>
+    </select>
+
+    <button type="submit">Add</button>
+</form>
+
+
+<ul>
+    {% for app in applications %}
+        <li>
+            <strong>{{ app['company'] }}</strong> — {{ app['status'] }}
+
+            <form method="POST" action="/delete/{{ app['id'] }}" style="display:inline;">
+                <button type="submit">❌</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>
+
+
